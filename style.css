@@ -1,6 +1,19 @@
 .priceIncrease {
-   color: green;
+  color: green;
 }
 .priceDrop {
-   color: red;
+  color: red;
+}
+.tooltip {
+  background-color: rgb(243, 165, 21);
+
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: ease 0.5s;
+  margin-left: -1px;
+}
+
+.tooltip:hover {
+  background-color: rgb(255, 176, 29);
 }

@@ -26,11 +26,9 @@ async function displayСurrency() {
         : "<span class='priceDrop'>▼</span>";
 
     if (item.Value < item.Previous) {
-      previousDay =
-        ((item.Previous - item.Value) / item.Value) * 100;
+      previousDay = ((item.Previous - item.Value) / item.Value) * 100;
     } else if (item.Value > item.Previous) {
-      previousDay =
-        ((item.Value - item.Previous) / item.Value) * 100;
+      previousDay = ((item.Value - item.Previous) / item.Value) * 100;
     } else {
       previousDay = 0;
     }
@@ -42,15 +40,47 @@ async function displayСurrency() {
             </tr>`;
 
     tbody.insertAdjacentHTML('beforeend', columnDataCurrencies);
-
-    console.log(item);
   });
+
+  pointingElement();
 }
 
 displayСurrency();
 
+// Функция отвечающая за появление tootlip при наведении на элемент списка
+async function pointingElement() {
+  const trTable = document.querySelectorAll('tr');
+  const allCurrencies = await getExchangeRate();
+;
+  trTable.forEach((item) => {
+    item.addEventListener('mouseenter', (event) => {
+      const currentRowTable = event.target;
 
-//    <!-- // Формат вывода - Код валюты, значение в рублях, разница в процентах в сравнении с предыдущим днем. Вывод в виде
-// списка. При наведении на элемент списка он должен выделяться и под курсором должно отображаться полное название валюты в
-// tooltip.
+      if (!currentRowTable.classList.contains('headlinesTable')) {
+        const btnTooltip = document.createElement('button');
+        btnTooltip.classList.add('tooltip');
+
+        const currentElementCurrencies = allCurrencies.find(({ CharCode }) => {
+          return CharCode === currentRowTable.firstElementChild.textContent;
+        }); // Находим элемент который совпадает с нашим кодом валюты.
+
+        btnTooltip.textContent = currentElementCurrencies.Name;
+
+        currentRowTable.insertAdjacentElement('afterend', btnTooltip); // Размещаем tootlip
+
+        currentRowTable.style.border = '2px inset orange'; // Добавляем стили при выделении валюты
+      }
+    });
+    item.addEventListener('mouseleave', (event) => {
+      event.target.style.border = 'none';
+      const btnTooltip = document.querySelector('.tooltip');
+      if (btnTooltip) {
+        btnTooltip.remove();
+      }
+    });
+  });
+}
+
+// При наведении на элемент списка он должен выделяться и под курсором должно отображаться полное название валюты в tooltip.
+
 // // При клике на элемент списка отображается список по данной валюте за 10 дней. -->
