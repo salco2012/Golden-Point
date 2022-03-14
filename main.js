@@ -35,8 +35,8 @@ async function displayСurrency() {
 
     const columnDataCurrencies = `<tr>
                <td>${item.CharCode}</td>
-               <td>${item.Value.toFixed(2)}</td>
-               <td>${previousDay.toFixed(2)} ${iconPreviousDay}</td>
+               <td>${item.Value.toFixed(2)} руб.</td>
+               <td>${previousDay.toFixed(2)} % ${iconPreviousDay}</td>
             </tr>`;
 
     tbody.insertAdjacentHTML('beforeend', columnDataCurrencies);
@@ -51,7 +51,6 @@ displayСurrency();
 async function pointingElement() {
   const trTable = document.querySelectorAll('tr');
   const allCurrencies = await getExchangeRate();
-;
   trTable.forEach((item) => {
     item.addEventListener('mouseenter', (event) => {
       const currentRowTable = event.target;
@@ -72,15 +71,11 @@ async function pointingElement() {
       }
     });
     item.addEventListener('mouseleave', (event) => {
-      event.target.style.border = 'none';
       const btnTooltip = document.querySelector('.tooltip');
+      event.target.style.border = 'none';
       if (btnTooltip) {
         btnTooltip.remove();
       }
     });
   });
 }
-
-// При наведении на элемент списка он должен выделяться и под курсором должно отображаться полное название валюты в tooltip.
-
-// // При клике на элемент списка отображается список по данной валюте за 10 дней. -->

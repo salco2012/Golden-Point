@@ -1,3 +1,8 @@
+.container {
+   margin-top: 50px;
+   margin-bottom: 50px;
+}
+
 .priceIncrease {
   color: green;
 }
@@ -12,8 +17,4 @@
   cursor: pointer;
   transition: ease 0.5s;
   margin-left: -1px;
-}
-
-.tooltip:hover {
-  background-color: rgb(255, 176, 29);
 }
