@@ -7,10 +7,35 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
    <link rel="stylesheet" href="style.css">
-   <title>Document</title>
+   <title>ТЗ Золотая точка</title>
 </head>
 
 <body>
+<!-- // Формат вывода - Код валюты, значение в рублях, разница в процентах в сравнении с предыдущим днем. Вывод в виде
+списка. При наведении на элемент списка он должен выделяться и под курсором должно отображаться полное название валюты в
+tooltip.
+// При клике на элемент списка отображается список по данной валюте за 10 дней. -->
+
+   <div class="container">
+      <table class="striped">
+         <thead>
+            <tr>
+               <th>Код валюты</th>
+               <th>Значение (руб.)</th>
+               <th>Разница (% с пред. днем)</th>
+            </tr>
+         </thead>
+      
+         <tbody>
+            <tr class="currency-code">
+            </tr>
+            <tr class="currency-value">
+            </tr>
+            <tr class="currency-difference">
+            </tr>
+         </tbody>
+      </table>
+   </div>
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
    <script src="main.js"></script>
