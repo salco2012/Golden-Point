@@ -17,27 +17,31 @@ getExchangeRate();
 async function displayСurrency() {
   const tbody = document.querySelector('tbody');
 
-  const allСurrencies = await getExchangeRate();
-  allСurrencies.forEach((item) => {
-    let currencyDifferencePreviousDay; // Разница между курсами
+  const allCurrencies = await getExchangeRate();
+  allCurrencies.forEach((item) => {
+    let previousDay; // Разница между курсами
+    let iconPreviousDay =
+      item.Value > item.Previous
+        ? "<span class='priceIncrease'>▲</span>"
+        : "<span class='priceDrop'>▼</span>";
 
     if (item.Value < item.Previous) {
-      currencyDifferencePreviousDay =
+      previousDay =
         ((item.Previous - item.Value) / item.Value) * 100;
     } else if (item.Value > item.Previous) {
-      currencyDifferencePreviousDay =
+      previousDay =
         ((item.Value - item.Previous) / item.Value) * 100;
     } else {
-      currencyDifferencePreviousDay = 0;
+      previousDay = 0;
     }
 
-    const columnDataСurrencies = `<tr>
+    const columnDataCurrencies = `<tr>
                <td>${item.CharCode}</td>
-               <td>${item.Value}</td>
-               <td>${currencyDifferencePreviousDay.toFixed(2)}</td>
+               <td>${item.Value.toFixed(2)}</td>
+               <td>${previousDay.toFixed(2)} ${iconPreviousDay}</td>
             </tr>`;
 
-    tbody.insertAdjacentHTML('beforeend', columnDataСurrencies);
+    tbody.insertAdjacentHTML('beforeend', columnDataCurrencies);
 
     console.log(item);
   });
